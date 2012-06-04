@@ -120,7 +120,21 @@ void iphone_UpdateScreen()
 void* app_Thread_Start(void* args)
 {
 	__emulation_run = 1;
-	iphone_main(0, NULL);
+    
+
+    
+    char* myargs[1];
+    @autoreleasepool {
+        NSString* documentsPath = [Helper documentPathWithFilename:@""];
+        if ([documentsPath hasSuffix:@"/"]) {
+            documentsPath = [documentsPath substringToIndex:documentsPath.length-1];
+        }
+        NSLog(@"%@", documentsPath);
+        const char* documentsPathC = [documentsPath UTF8String];
+        strcpy(myargs[0], documentsPathC);
+
+    }
+    iphone_main(1, myargs);
 	__emulation_run = 0;
 	return NULL;
 }

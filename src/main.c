@@ -56,14 +56,9 @@
 //#include "fdc.h"
 #include "empty_dsk.h"
 #include "shared.h"
+#include <string.h>
 
-#if defined(IPHONE)
-char globalpath[247]="/var/mobile/Media/ROMs/iXpectrum/";
-#elif defined(ANDROID)
-char globalpath[247]="/sdcard/ROMs/xpectroid/";
-#else
-char globalpath[247]="roms/";
-#endif
+char globalpath[247];
 char actual_roms_dir[512] = "";
 
 long cur_frame;
@@ -4012,8 +4007,16 @@ int main(int argc, char *argv[])
     int fpsseg_draw = 0;
 
 #ifdef DEBUG_MSG
-    printf("Iniciando xpectrum\n");
+    printf("Initialization\n");
 #endif
+    
+#if defined(IPHONE)
+    char *doc_path = argv[0];
+    strcpy(globalpath, doc_path);
+    printf("%s",globalpath);
+#endif
+
+    
 
     microlib_init();
 

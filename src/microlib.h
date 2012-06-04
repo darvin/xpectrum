@@ -73,4 +73,6 @@ extern int            sound_close();
 extern void           sound_volume(int, int);
 extern int            sound_send(void *samples,int nsamples);
 
+
+const char* get_documents_path(char* file);
 #endif

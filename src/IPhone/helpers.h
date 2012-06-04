@@ -36,6 +36,7 @@ and the 2011 next generation iPad will be == iPad2,1
 
 #import <UIKit/UIKit.h>
 
+const char* get_documents_path(char* file);
 @interface Helper : NSObject
 + (NSString *)machine;
 +(NSString*) resourcePathWithFilename:(NSString*)filename;
