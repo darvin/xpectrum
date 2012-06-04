@@ -138,7 +138,7 @@ extern int isIpad;
 							 nil]];	
 
 	
-    NSString *path= @"/var/mobile/Media/ROMs/iXpectrum/saves/options_v3.bin";
+    NSString *path= [Helper documentPathWithFilename:  @"saves/options_v3.bin"];
 	NSData *plistData;
 	
 	NSString *error;

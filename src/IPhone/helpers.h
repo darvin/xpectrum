@@ -38,10 +38,10 @@ and the 2011 next generation iPad will be == iPad2,1
 
 @interface Helper : NSObject
 + (NSString *)machine;
++(NSString*) resourcePathWithFilename:(NSString*)filename;
++(NSString*) documentPathWithFilename:(NSString*)filename;
 @end
 
-extern const char* get_resource_path(char* file);
-extern const char* get_documents_path(char* file);
 
 
 

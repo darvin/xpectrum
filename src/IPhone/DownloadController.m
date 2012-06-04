@@ -18,7 +18,7 @@
 */
 
 #import "DownloadController.h"
-
+#import "helpers.h"
 #include <stdio.h>
 
 extern int isIpad;
@@ -356,7 +356,7 @@ extern int iphone_menu;
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)conn
 {
-   BOOL b = [payload writeToFile: [NSString stringWithFormat:@"/var/mobile/Media/ROMs/iXpectrum/downloads/%@", [[[dRequest URL] path] lastPathComponent]] atomically:NO];
+    BOOL b = [payload writeToFile: [Helper documentPathWithFilename:[NSString stringWithFormat:@"downloads/%@", [[[dRequest URL] path] lastPathComponent]]] atomically:NO];
    
    if(!b)
    {

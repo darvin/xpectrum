@@ -1575,7 +1575,7 @@ unsigned int _IN_A_hook[2][2];//={{0x05f1-2,0x0000};
 short new_IN_A_pos=1;
 
 
-void inline
+void extern inline
 loader (register Z80Regs *spectrumZ80)
 {
     /*

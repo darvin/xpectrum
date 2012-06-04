@@ -18,8 +18,7 @@
 */
 
 #import "HelpController.h"
-#include <stdio.h>
-
+#import "helpers.h"
 
 @implementation HelpController
 
@@ -70,24 +69,11 @@
 
     textView.editable = NO;
 
-    file = fopen("/Applications/iXpectrum.app/readme.txt", "r");
-
-    if (!file) 
-    {        
-            textView.textColor =  [UIColor redColor];            
-            [ textView setText: @"ERROR: File not found" ];
-            
-    } else 
-    {
-            buffer[0] = 0;
-            while((fgets(buf, sizeof(buf), file))!=NULL) {
-                strlcat(buffer, buf, sizeof(buffer));
-            }
-            fclose(file);
-
-            [ textView setText: [ [[ NSString alloc ] initWithCString: buffer ] autorelease]];
-    }
-
+    NSError *error;
+    NSString *helpFilename = [Helper resourcePathWithFilename:@"readme.txt"];
+    
+    NSString * helpText = [NSString stringWithContentsOfFile:helpFilename encoding:NSASCIIStringEncoding error:&error];
+    [textView setText:helpText];
     [ self.view addSubview: textView ];
     [textView release];
     

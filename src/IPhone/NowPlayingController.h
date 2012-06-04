@@ -196,6 +196,7 @@ CGRect rLoopImageMask;
 
 @interface NowPlayingController : UIViewController <UIActionSheetDelegate> 
 {
+    BOOL needsBuilding;
 
   //UIWindow		    * window;
   UIView			* screenView;

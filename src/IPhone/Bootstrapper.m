@@ -33,8 +33,8 @@ int isIpad = 0;
 	
 	//printf("Machine: '%s'\n",[[Helper machine] UTF8String]) ;
 	
-	mkdir("/var/mobile/Media/ROMs/iXpectrum/downloads", 0755);
-	mkdir("/var/mobile/Media/ROMs/iXpectrum/saves", 0755);
+	mkdir([[Helper documentPathWithFilename:@"downloads"] UTF8String], 0755);
+	mkdir([[Helper documentPathWithFilename:@"saves"] UTF8String], 0755);
 
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     

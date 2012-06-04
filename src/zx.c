@@ -909,7 +909,7 @@ Z80Patch (register Z80Regs * regs)
 
 }
 
-void inline
+void extern inline
 Z80WriteMem (register word where, register byte A)
 {
 volatile word whereA;
@@ -928,7 +928,7 @@ if(MEMc[whereA])
 spectrumZ80->ICount-=3;
 }
 
-void inline
+void extern inline
 Z80WriteMem_notiming (register word where, register byte A)
 {
 volatile word whereA;
@@ -941,7 +941,7 @@ void POKE(unsigned dir,unsigned char dat)
 Z80WriteMem_notiming(dir,dat);
 }
 
-byte inline
+byte extern inline
 Z80ReadMem(register word where)
 {
 volatile word whereA;
@@ -951,7 +951,7 @@ spectrumZ80->ICount-=3;
 return *((byte *)(MEMr[whereA]+(where)));
 }
 
-byte inline
+byte extern inline
 Z80ReadMem_notiming(register word where)
 {
 volatile word whereA;
@@ -959,7 +959,7 @@ whereA=where>>14;
 return *((byte *)(MEMr[whereA]+(where)));
 }
 
-void inline contend_read(word where)
+void extern inline contend_read(word where)
 {
 volatile word whereA;
 whereA=where>>14;
@@ -967,7 +967,7 @@ if(MEMc[whereA]) spectrumZ80->ICount-=(cycles_delay2[spectrumZ80->ICount]);
 spectrumZ80->ICount--;
 }
 
-void inline contend_read_jr(void)
+void extern inline contend_read_jr(void)
 {
 volatile word whereA;
 whereA=spectrumZ80->PC.W>>14;
@@ -976,7 +976,7 @@ spectrumZ80->PC.W++;
 spectrumZ80->ICount-=3;
 }
 
-void inline contend_read_byte(void)
+void extern inline contend_read_byte(void)
 {
 volatile byte whereA;
 whereA=spectrumZ80->I>>6;
@@ -984,7 +984,7 @@ if(MEMc[whereA]) spectrumZ80->ICount-=(cycles_delay2[spectrumZ80->ICount]);
 spectrumZ80->ICount--;
 }
 
-void inline contend_read_byte_x2(void)
+void extern inline contend_read_byte_x2(void)
 {
 volatile byte whereA;
 whereA=spectrumZ80->I>>6;
@@ -998,7 +998,7 @@ else    {
         }
 }
 
-void inline contend_read_byte_x7(void)
+void extern inline contend_read_byte_x7(void)
 {
 volatile byte whereA;
 whereA=spectrumZ80->I>>6;
@@ -1017,7 +1017,7 @@ else    {
         }
 }
 
-void inline contend_read_x5(word where)
+void extern inline contend_read_x5(word where)
 {
 volatile word whereA;
 whereA=where>>14;
@@ -1034,7 +1034,7 @@ else    {
         }
 }
 
-void inline contend_read_x4(word where)
+void extern inline contend_read_x4(word where)
 {
 volatile word whereA;
 whereA=where>>14;
@@ -1050,7 +1050,7 @@ else    {
         }
 }
 
-void inline contend_read_x2(word where)
+void extern inline contend_read_x2(word where)
 {
 volatile word whereA;
 whereA=where>>14;
@@ -1064,14 +1064,14 @@ else    {
         }
 }
 
-void inline ula_contend_port_early(word port)
+void extern inline ula_contend_port_early(word port)
 {
 if(MEMc[port>>14])
         spectrumZ80->ICount-=(cycles_delay2[spectrumZ80->ICount]);
 spectrumZ80->ICount-=1;
 }
 
-void inline ula_contend_port_late(word port)
+void extern inline ula_contend_port_late(word port)
 {
 if((contended_mask!=4)&&((port & 0x0001) == 0))
         {

@@ -373,75 +373,7 @@ void* app_Thread_Start(void* args)
 
 - (void)drawRect:(CGRect)rect
 {
-    //printf("Draw rect\n");
-    // UIView uses the existence of -drawRect: to determine if should allow its CALayer
-    // to be invalidated, which would then lead to the layer creating a backing store and
-    // -drawLayer:inContext: being called.
-    // By implementing an empty -drawRect: method, we allow UIKit to continue to implement
-    // this logic, while doing our real drawing work inside of -drawLayer:inContext:
     
-   // if(1)return;
-      
-   /*
-    CGImageRef cgImage = CGBitmapContextCreateImage(bitmapContext);
-        
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGRect area;
-    
-        if(!iphone_is_landscape) //Portrait
-		{
-
-			area= rPortraitSurfaceviewFrame;			
-		  
-		}
-		else
-		{	
-			   			
-		   if(!iphone_keep_aspect_ratio)
-			  area= rLandscapeNokeepAspectSurfaceviewFrame;
-		   else
-		   {
-		      area.origin.x = 0;
-		      area.origin.y = 0; 
-		      area.size.width = rLandscapeKeepAspectSurfaceviewFrame.size.width;//keep aspect
-		      area.size.height = rLandscapeKeepAspectSurfaceviewFrame.size.height;//keep aspect
-		   }
-				
-		}
-    */
-    //CGContextTranslateCTM(context, 0, area.size.height);
-	
-	//CGContextScaleCTM(context, 1.0, -1.0);
-	
-	//CGContextSetAllowsAntialiasing(context,false);
-	
-    //CGContextSetShouldAntialias(context, false);
-    
-    //CGContextSetInterpolationQuality(context,kCGInterpolationNone);
-	
-    //CGContextDrawImage(context, area, cgImage);
-    
-    //self.layer.contents = (id)cgImage;
-    
-    
-    //UIImage *newUIImage = [UIImage imageWithCGImage:cgImage];
-    //[newUIImage drawInRect:rect];
-    //[newUIImage release];
-    
-    
-	/*    
-	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFSTR("image.png"), kCFURLPOSIXPathStyle, false);
-	
-	CFStringRef type = kUTTypePNG; // or kUTTypeBMP if you like
-	CGImageDestinationRef dest = CGImageDestinationCreateWithURL(url, type, 1, 0);
-	
-	CGImageDestinationAddImage(dest, cgImage, 0);
-	*/
-	
-	//CFRelease(cgImage);
-	//CFRelease(bitmapContext);
-	//CGImageDestinationFinalize(dest);
-	//free(rgba);
     
 }
 
@@ -2216,16 +2148,16 @@ int lastY = 0;
 	if(!orientation)
 	{
 		if(isIpad)
-		  fp = fopen([[NSString stringWithFormat:@"%scontroller_portrait_iPad.txt", get_resource_path("/")] UTF8String], "r");
+		  fp = fopen([[Helper resourcePathWithFilename:@"controller_portrait_iPad.txt"] UTF8String], "r");
 		else
-		  fp = fopen([[NSString stringWithFormat:@"%scontroller_portrait_iPhone.txt", get_resource_path("/")] UTF8String], "r");
+		  fp = fopen([[Helper resourcePathWithFilename:@"controller_portrait_iPhone.txt"] UTF8String], "r");
     }
 	else
 	{
 		if(isIpad)
-		   fp = fopen([[NSString stringWithFormat:@"%scontroller_landscape_iPad.txt", get_resource_path("/")] UTF8String], "r");
+		   fp = fopen([[Helper resourcePathWithFilename:@"controller_landscape_iPad.txt"] UTF8String], "r");
 		else
-		   fp = fopen([[NSString stringWithFormat:@"%scontroller_landscape_iPhone.txt", get_resource_path("/")] UTF8String], "r");
+		   fp = fopen([[Helper resourcePathWithFilename:@"controller_landscape_iPhone.txt"] UTF8String], "r");
 	}
 	
 	if (fp) 
@@ -2286,16 +2218,16 @@ int lastY = 0;
 	if(!orientation)
 	{
 		if(isIpad)
-		  fp = fopen([[NSString stringWithFormat:@"%skeyboard_portrait_iPad.txt", get_resource_path("/")] UTF8String], "r");
+		  fp = fopen([[Helper resourcePathWithFilename:@"keyboard_portrait_iPad.txt"] UTF8String], "r");
 		else
-		  fp = fopen([[NSString stringWithFormat:@"%skeyboard_portrait_iPhone.txt", get_resource_path("/")] UTF8String], "r");
+		  fp = fopen([[Helper resourcePathWithFilename:@"keyboard_portrait_iPhone.txt"] UTF8String], "r");
     }
 	else
 	{
 		if(isIpad)
-		   fp = fopen([[NSString stringWithFormat:@"%skeyboard_landscape_iPad.txt", get_resource_path("/")] UTF8String], "r");
+		   fp = fopen([[Helper resourcePathWithFilename:@"keyboard_landscape_iPad.txt"] UTF8String], "r");
 		else
-		   fp = fopen([[NSString stringWithFormat:@"%skeyboard_landscape_iPhone.txt", get_resource_path("/")] UTF8String], "r");
+		   fp = fopen([[Helper resourcePathWithFilename:@"keyboard_landscape_iPhone.txt"] UTF8String], "r");
 	}
 	
 	if (fp) 
@@ -2381,9 +2313,9 @@ int lastY = 0;
     FILE *fp;
 	
 	if(isIpad)
-	   fp = fopen([[NSString stringWithFormat:@"%sconfig_iPad.txt", get_resource_path("/")] UTF8String], "r");
+	   fp = fopen([[Helper resourcePathWithFilename:@"config_iPad.txt"] UTF8String], "r");
 	else
-	   fp = fopen([[NSString stringWithFormat:@"%sconfig_iPhone.txt", get_resource_path("/")] UTF8String], "r");
+	   fp = fopen([[Helper resourcePathWithFilename:@"config_iPhone.txt"] UTF8String], "r");
 	   	
 	if (fp) 
 	{

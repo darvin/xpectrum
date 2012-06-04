@@ -283,7 +283,7 @@ inline void cmd_write(void)
 
 
 
-inline void cmd_read(void)
+extern inline void cmd_read(void)
 {
    t_sector *sector;
 
@@ -372,7 +372,7 @@ inline void cmd_readtrk(void)
 
 
 
-inline void cmd_scan(void)
+extern inline void cmd_scan(void)
 {
    t_sector *sector;
 
