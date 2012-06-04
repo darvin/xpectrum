@@ -50,7 +50,7 @@ extern int isIpad;
 
 - (void)loadOptions
 {
-	NSString *path= @"/var/mobile/Media/ROMs/iXpectrum/saves/options_v3.bin";
+	NSString *path= [self optionsFilePath];
 	
 	NSData *plistData;
 	id plist;
@@ -67,7 +67,7 @@ extern int isIpad;
 	if(!plist)
 	{
 		
-		NSLog(error);
+		NSLog(@"%@", error);
 		
 		[error release];
 		
@@ -116,6 +116,10 @@ extern int isIpad;
 			
 }
 
+-(NSString*) optionsFilePath {
+    return [Helper documentPathWithFilename:  @"saves/options_v3.bin"];
+}
+
 - (void)saveOptions
 {
 
@@ -138,7 +142,7 @@ extern int isIpad;
 							 nil]];	
 
 	
-    NSString *path= [Helper documentPathWithFilename:  @"saves/options_v3.bin"];
+    NSString *path= [self optionsFilePath];
 	NSData *plistData;
 	
 	NSString *error;
@@ -148,27 +152,18 @@ extern int isIpad;
 										     errorDescription:&error];	
 	if(plistData)		
 	{
-	   NSError*err;
 	
-		BOOL b = [plistData writeToFile:path atomically:NO];
-		//BOOL b = [plistData writeToFile:path options:0  error:&err];
+        BOOL b = [plistData writeToFile:path atomically:NO];
 		if(!b)
 		{
 			    UIAlertView *errAlert = [[UIAlertView alloc] initWithTitle:@"Error saving preferences!" 
-															message://[NSString stringWithFormat:@"Error:%@",[err localizedDescription]]  
-															@"Preferences couldn't be saved.\n Check for write permissions on '/var/mobile/Media/ROMs/iXpectrum/saves/'. chmod 777 if needed. See help." 
+						message: [NSString stringWithFormat:				@"Preferences couldn't be saved.\n Check for write permissions on '%@'. chmod 777 if needed. See help.", path] 
 															delegate:self 
 													        cancelButtonTitle:@"OK" 
 													        otherButtonTitles: nil];	
 	           [errAlert show];
 	           [errAlert release];
 		}		
-	}
-	else
-	{
-
-		NSLog(error);		
-		[error release];		
 	}	
 }
 
@@ -221,7 +216,7 @@ extern int isIpad;
    [ navBar setDelegate: self ];
 
    UINavigationItem *item = [[ UINavigationItem alloc ] initWithTitle:@"Options" ];
-   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:[self parentViewController]  action:  @selector(done:) ];
+   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:[self presentingViewController]  action:  @selector(done:) ];
    item.rightBarButtonItem = backButton;
    [backButton release];
    [ navBar pushNavigationItem: item  animated:YES];
@@ -252,7 +247,7 @@ extern int isIpad;
    if (cell == nil)
    {
       //If not possible create a new cell
-      cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"CellIdentifier"]
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"]
                             autorelease];
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -268,7 +263,7 @@ extern int isIpad;
            {
                case 0: 
                {
-                   cell.text  = @"Crop Speccy Border";
+                   cell.textLabel.text = @"Crop Speccy Border";
                    switchCropBorderPort = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchCropBorderPort;
                    [switchCropBorderPort setOn:[op cropBorderPort] animated:NO];
@@ -277,7 +272,7 @@ extern int isIpad;
                }
                case 1: 
                {
-                   cell.text  = @"Smoothed Image";
+                   cell.textLabel.text  = @"Smoothed Image";
                    switchSmoothedPort = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchSmoothedPort;
                    [switchSmoothedPort setOn:[op smoothedPort] animated:NO];
@@ -287,7 +282,7 @@ extern int isIpad;
                
                case 2:
                {
-                   cell.text  = @"TV Filter";
+                   cell.textLabel.text  = @"TV Filter";
                    switchTvFilterPort  = [[UISwitch alloc] initWithFrame:CGRectZero];                               
                    cell.accessoryView = switchTvFilterPort ;
                    [switchTvFilterPort setOn:[op tvFilterPort] animated:NO];
@@ -296,7 +291,7 @@ extern int isIpad;
                }
                case 3:
                {
-                   cell.text  = @"Scanline Filter";
+                   cell.textLabel.text  = @"Scanline Filter";
                    switchScanlineFilterPort  = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchScanlineFilterPort ;
                    [switchScanlineFilterPort setOn:[op scanlineFilterPort] animated:NO];
@@ -307,7 +302,7 @@ extern int isIpad;
                {
                    if(isIpad)
                    {
-	                   cell.text  = @"Original Size";
+	                   cell.textLabel.text  = @"Original Size";
 	                   switchKeepAspect  = [[UISwitch alloc] initWithFrame:CGRectZero];                
 	                   cell.accessoryView = switchKeepAspect ;
 	                   [switchKeepAspect setOn:[op keepAspectRatio] animated:NO];
@@ -324,7 +319,7 @@ extern int isIpad;
            {
                case 0: 
                {
-                   cell.text  = @"Crop Speccy Border";
+                   cell.textLabel.text  = @"Crop Speccy Border";
                    switchCropBorderLand = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchCropBorderLand;
                    [switchCropBorderLand setOn:[op cropBorderLand] animated:NO];
@@ -333,7 +328,7 @@ extern int isIpad;
                }
                case 1: 
                {
-                   cell.text  = @"Smoothed Image";
+                   cell.textLabel.text  = @"Smoothed Image";
                    switchSmoothedLand = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchSmoothedLand;
                    [switchSmoothedLand setOn:[op smoothedLand] animated:NO];
@@ -342,7 +337,7 @@ extern int isIpad;
                }
                case 2:
                {
-                   cell.text  = @"TV Filter";
+                   cell.textLabel.text  = @"TV Filter";
                    switchTvFilterLand  = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchTvFilterLand ;
                    [switchTvFilterLand setOn:[op tvFilterLand] animated:NO];
@@ -351,7 +346,7 @@ extern int isIpad;
                }
                case 3:
                {
-                   cell.text  = @"Scanline Filter";
+                   cell.textLabel.text  = @"Scanline Filter";
                    switchScanlineFilterLand  = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchScanlineFilterLand ;
                    [switchScanlineFilterLand setOn:[op scanlineFilterLand] animated:NO];
@@ -362,7 +357,7 @@ extern int isIpad;
                {
                    if(!isIpad)
                    {
-	                   cell.text  = @"Keep Aspect Ratio";
+	                   cell.textLabel.text  = @"Keep Aspect Ratio";
 	                   switchKeepAspect  = [[UISwitch alloc] initWithFrame:CGRectZero];                
 	                   cell.accessoryView = switchKeepAspect ;
 	                   [switchKeepAspect setOn:[op keepAspectRatio] animated:NO];
@@ -379,7 +374,7 @@ extern int isIpad;
             {
                case 0:
                {
-                   cell.text  = @"Safe Render Path";
+                   cell.textLabel.text  = @"Safe Render Path";
                    switchSafeRender  = [[UISwitch alloc] initWithFrame:CGRectZero];                
                    cell.accessoryView = switchSafeRender ;
                    [switchSafeRender setOn:[op safeRenderPath] animated:NO];
@@ -408,6 +403,7 @@ extern int isIpad;
           case 1: return @"Landscape";
           case 2: return @"Miscellaneous";
     }
+    return @"error";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -418,6 +414,7 @@ extern int isIpad;
           case 1: return isIpad ? 4 : 5;
           case 2: return isIpad ? 0 : 1;
       }
+    return 0;
 }
 
 -(void)viewDidLoad{	

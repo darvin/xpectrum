@@ -1,7 +1,9 @@
 #define LOW_ENDIAN
 #define USING_ALLEGRO
-  
+ 
+#ifndef DEBUG
 #define DEBUG
+#endif
 #define _DEV_DEBUG_                         /* development debugging */
 #define LOW_ENDIAN
 /*#define HI_ENDIAN */ 

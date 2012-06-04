@@ -191,7 +191,7 @@ beep_change_count=0; //aqui no!
 int first_init=1;
 void sound_init(int cpc_type, int cycles_per_frame)
 {
-int f,ret;
+int f;
 
 //////////////
 //   fpp=fopen("/mnt/sd/sound.bin","wb");
@@ -751,7 +751,7 @@ void Sound_Loop()
 signed short *ptr,*tptr;
 signed short samp;
 
-int n,f,bchan,v;
+int f;
 
 //curFrame++;
 

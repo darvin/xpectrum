@@ -192,7 +192,7 @@ void* app_Thread_Start(void* args)
         rotateTransform = CGAffineTransformIdentity;
         self.affineTransform = rotateTransform;
                        		
-		if(iphone_smooth_land && iphone_is_landscape || iphone_smooth_port && !iphone_is_landscape)
+		if((iphone_smooth_land && iphone_is_landscape) || (iphone_smooth_port && !iphone_is_landscape))
 		{
 		   [self setMagnificationFilter:kCAFilterLinear];
   	       [self setMinificationFilter:kCAFilterLinear];
@@ -581,7 +581,6 @@ void* app_Thread_Start(void* args)
 
 
 - (void)startEmu:(char*)path {
-	int i = 0;
 	 
     iphone_menu = IPHONE_MENU_DISABLED;
 		
@@ -1208,8 +1207,6 @@ int k = 0;
                CGFloat xDisplacement = point.x - lastLocation1.x;
                CGFloat yDisplacement = point.y - lastLocation1.y;
                
-               CGFloat xDisplacementAbs = fabs(xDisplacement);
-               CGFloat yDisplacementAbs = fabs(yDisplacement);
                
                
                float angle = atan2f(xDisplacement, yDisplacement); // in radians

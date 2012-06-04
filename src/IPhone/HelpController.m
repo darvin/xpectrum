@@ -49,7 +49,7 @@
    [ navBar setDelegate: self ];
 
    UINavigationItem *item = [[ UINavigationItem alloc ] initWithTitle:@"Credits & Help" ];
-   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:[self parentViewController]   action:  @selector(done:) ];
+   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:[self presentingViewController]   action:  @selector(done:) ];
    item.rightBarButtonItem = backButton;
    [backButton release];
    [ navBar pushNavigationItem: item  animated:YES];
@@ -58,8 +58,6 @@
    [navBar release];
     
     
-    FILE *file;
-    char buffer[262144], buf[1024];
 
     UITextView *textView = [ [ UITextView alloc ] initWithFrame: CGRectMake(rect.origin.x, rect.origin.y + 45.0f, rect.size.width,rect.size.height - 45.0f )];
 //        [ textView setTextSize: 12 ];

@@ -53,7 +53,7 @@ extern iphone_menu;
 
    UINavigationItem *item = [[ UINavigationItem alloc ] initWithTitle:@"Donate" ];
    
-   UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Quit" style:UIBarButtonItemStyleBordered target:/*[self parentViewController]*/self action:  @selector(mydone:) ] autorelease];
+   UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Quit" style:UIBarButtonItemStyleBordered target:self action:  @selector(mydone:) ] autorelease];
    item.rightBarButtonItem = backButton;
   
    /*  

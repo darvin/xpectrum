@@ -121,7 +121,6 @@ void dump_video()
 	 if(screenbuffer==NULL)return;
 	 //unsigned char *p=(unsigned char *)screenbuffer;
 
-	 unsigned short *color;
 	 int i=0;
 
 	 unsigned short*pt;
@@ -244,7 +243,6 @@ void queue(unsigned char *p,unsigned size){
 
 unsigned short dequeue(unsigned char *p,unsigned size){
 //printf("-->sacan %d h: %d t: %d TAM %d\n",size,head,tail,TAM);
-	int j = 0;
 	unsigned real;
 //	while(1){
 		//printf("Hago lock en dequeue\n");
@@ -377,8 +375,6 @@ void checkStatus(OSStatus status){}
 
 int sound_open(int rate, int bits, int stereo){
 	    Float64 sampleRate = 44100.0;
-	    int i;
-	    UInt32 bufferBytes;
 
 	    stereof = stereo;
 

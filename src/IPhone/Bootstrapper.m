@@ -36,7 +36,7 @@ int isIpad = 0;
 	mkdir([[Helper documentPathWithFilename:@"downloads"] UTF8String], 0755);
 	mkdir([[Helper documentPathWithFilename:@"saves"] UTF8String], 0755);
 
-    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
 	[[UIApplication sharedApplication] setIdleTimerDisabled:YES];//TODO ???
 	/*
